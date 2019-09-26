@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppEnc.Android", "AppEnc\AppEnc.Android\AppEnc.Android.csproj", "{072AED95-EB0E-4A00-92FF-EDBAA062F076}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppEnc", "AppEnc\AppEnc\AppEnc.csproj", "{C1FEDC06-5163-4D51-B6FE-A3658CA6794D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppEnc", "AppEnc\AppEnc\AppEnc.csproj", "{C1FEDC06-5163-4D51-B6FE-A3658CA6794D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

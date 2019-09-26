@@ -11,13 +11,13 @@ using Xamarin.Forms.Xaml;
 namespace AppEnc.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPageDetail : ContentPage
+    public partial class VoituresPageDetail : ContentPage
     {
-        ItemsViewModel pageModel;
-        public MainPageDetail()
+        VoituresViewModel pageModel;
+        public VoituresPageDetail()
         {
             InitializeComponent();
-            pageModel = new ItemsViewModel(this);
+            pageModel = new VoituresViewModel(this);
             BindingContext = pageModel;
         }
     }

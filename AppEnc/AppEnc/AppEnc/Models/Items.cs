@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace AppEnc.Views
 {
@@ -11,5 +12,11 @@ namespace AppEnc.Views
     {
         public int Id { get; set; }
         public string Title { get; set; }
+    }
+
+    public class Voiture
+    {
+        public Image Photo { get; set; }
+        public int Imatriculation { get; set; }
     }
 }

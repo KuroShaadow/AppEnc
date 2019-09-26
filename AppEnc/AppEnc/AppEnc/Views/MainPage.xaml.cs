@@ -24,7 +24,7 @@ namespace AppEnc.Views
             if (item == null)
                 return;
 
-            Detail = new NavigationPage();
+            Detail = new MainPage();
             IsPresented = false;
 
             MasterPage.ListView.SelectedItem = null;

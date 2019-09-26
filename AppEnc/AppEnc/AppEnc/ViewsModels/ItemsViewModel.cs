@@ -7,11 +7,11 @@ using Xamarin.Forms;
 
 namespace AppEnc.ViewsModels
 {
-    public class ItemsViewModel : BindableObject
+    public class VoituresViewModel : BindableObject
     {
-        private MainPageDetail mainPage;
+        private VoituresPageDetail mainPage;
 
-        public ItemsViewModel(MainPageDetail mainPage)
+        public VoituresViewModel(VoituresPageDetail mainPage)
         {
             this.mainPage = mainPage;
             AddItems();
@@ -20,11 +20,11 @@ namespace AppEnc.ViewsModels
         private void AddItems()
         {
             for (int i = 0; i < 20; i++)
-                Items.Add(string.Format("List Item at {0}", i));
+                Items.Add(new Voiture() { Imatriculation = i * 1000, Photo = new Image() }) ;
         }
 
-        private ObservableCollection<string> _items = new ObservableCollection<string>();
-        public ObservableCollection<string> Items
+        private ObservableCollection<Voiture> _items = new ObservableCollection<Voiture>();
+        public ObservableCollection<Voiture> Items
         {
             get
             {
