@@ -8,23 +8,22 @@
              x:Class="AppEnc.Views.VoituresPageDetail">
     <StackLayout Padding="10">
         <flv:FlowListView FlowColumnMinWidth="150"  
-                SeparatorVisibility="Default"   
-                HasUnevenRows="True"  
-                FlowItemTappedCommand="{Binding ItemTappedCommand}"   
-                FlowItemsSource="{Binding Items}">
+                            SeparatorVisibility="Default"   
+                            HasUnevenRows="True"  
+                            FlowItemTappedCommand="{Binding ItemTappedCommand}"   
+                            FlowItemsSource="{Binding Items}">
 
             <flv:FlowListView.FlowColumnTemplate>
                 <DataTemplate>
                     <Frame BackgroundColor="LightGray"
-                           Margin="5">
-                        <StackLayout HeightRequest="75">
+                           Margin="5"
+                           HeightRequest="75">
+                        <StackLayout>
                             <Image Source="voiture.jpg"/>
-                            <Label HorizontalOptions="Fill"
-                               VerticalOptions="Fill"
-                               TextColor="Gray"
-                               XAlign="Center"
-                               YAlign="Center"
-                               Text="{Binding Imatriculation}"/>
+                            <Label TextColor="Black"
+                                   XAlign="Center"
+                                   YAlign="Center"
+                                   Text="{Binding Imatriculation}"/>
                         </StackLayout>
                     </Frame>
                 </DataTemplate>

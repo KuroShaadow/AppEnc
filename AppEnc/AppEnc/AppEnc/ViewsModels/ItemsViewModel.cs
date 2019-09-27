@@ -44,9 +44,9 @@ namespace AppEnc.ViewsModels
         {
             get
             {
-                return new Command((data) =>
+                return new Command(async (data) =>
                 {
-                    MainPage.Detail = new NavigationPage(new PrixPageDetail(new Item { Vehicule = data as Voiture }, MainPage));
+                    await MainPage.Detail.Navigation.PushAsync(new PrixPageDetail(new Item { Vehicule = data as Voiture }, MainPage));
                 });
             }
         }
