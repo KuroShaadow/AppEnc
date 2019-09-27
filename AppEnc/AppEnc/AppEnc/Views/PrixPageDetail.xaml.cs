@@ -11,14 +11,15 @@ using Xamarin.Forms.Xaml;
 namespace AppEnc.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class VoituresPageDetail : ContentPage
+    public partial class PrixPageDetail : ContentPage
     {
-        VoituresViewModel pageModel;
-        public VoituresPageDetail(MainPage main)
+        PrixViewModel pageModel;
+        Item Item;
+        public PrixPageDetail(Item item, MainPage main)
         {
+            Item = item;
             InitializeComponent();
-            pageModel = new VoituresViewModel(main);
-            BindingContext = pageModel;
+            BindingContext = pageModel = new PrixViewModel(main);
         }
     }
 }

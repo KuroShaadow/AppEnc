@@ -6,14 +6,7 @@
              mc:Ignorable="d"
              x:Class="AppEnc.Views.MainPage"
              xmlns:pages="clr-namespace:AppEnc.Views">
-  <MasterDetailPage.Master>
-    <pages:MainPageMaster x:Name="MasterPage" />
-  </MasterDetailPage.Master>
-  <MasterDetailPage.Detail>
-    <NavigationPage>
-      <x:Arguments>
-        <pages:VoituresPageDetail />
-      </x:Arguments>
-    </NavigationPage>
-  </MasterDetailPage.Detail>
+    <MasterDetailPage.Master>
+        <pages:MainPageMaster x:Name="MasterPage" />
+    </MasterDetailPage.Master>
 </MasterDetailPage>

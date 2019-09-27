@@ -9,11 +9,11 @@ namespace AppEnc.ViewsModels
 {
     public class VoituresViewModel : BindableObject
     {
-        private VoituresPageDetail mainPage;
+        private MainPage MainPage;
 
-        public VoituresViewModel(VoituresPageDetail mainPage)
+        public VoituresViewModel(MainPage mainPage)
         {
-            this.mainPage = mainPage;
+            MainPage = mainPage;
             AddItems();
         }
 
@@ -46,7 +46,56 @@ namespace AppEnc.ViewsModels
             {
                 return new Command((data) =>
                 {
-                    mainPage.DisplayAlert("FlowListView", data + "", "Ok");
+                    MainPage.Detail = new NavigationPage(new PrixPageDetail(new Item { Vehicule = data as Voiture }, MainPage));
+                });
+            }
+        }
+    }
+
+    public class PrixViewModel : BindableObject
+    {
+        private MainPage MainPage;
+
+        public PrixViewModel(MainPage mainPage)
+        {
+            MainPage = mainPage;
+            AddItems();
+        }
+
+        private void AddItems()
+        {
+            Items.Add(new DureePrix() { Duree = 7, Prix = 5 });
+            Items.Add(new DureePrix() { Duree = 15, Prix = 8 });
+            Items.Add(new DureePrix() { Duree = 20, Prix = 10 });
+            Items.Add(new DureePrix() { Duree = 30, Prix = 15 });
+            Items.Add(new DureePrix() { Duree = 45, Prix = 20 });
+            Items.Add(new DureePrix() { Duree = 60, Prix = 25 });
+        }
+
+        private ObservableCollection<DureePrix> _items = new ObservableCollection<DureePrix>();
+        public ObservableCollection<DureePrix> Items
+        {
+            get
+            {
+                return _items;
+            }
+            set
+            {
+                if (_items != value)
+                {
+                    _items = value;
+                    OnPropertyChanged(nameof(Items));
+                }
+            }
+        }
+
+        public Command ItemTappedCommand
+        {
+            get
+            {
+                return new Command((data) =>
+                {
+                    MainPage.DisplayAlert("FlowListView", data + "", "Ok");
                 });
             }
         }

@@ -14,9 +14,21 @@ namespace AppEnc.Views
         public string Title { get; set; }
     }
 
+    public class Item
+    {
+        public Voiture Vehicule { get; set; }
+        public DureePrix Prix { get; set; }
+    }
+
     public class Voiture
     {
         public Image Photo { get; set; }
         public int Imatriculation { get; set; }
+    }
+
+    public class DureePrix
+    {
+        public int Prix { get; set; }
+        public int Duree { get; set; }
     }
 }

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             x:Class="AppEnc.Views.PrixPageDetail">
+    <StackLayout Padding="10">
+        <flv:FlowListView FlowColumnMinWidth="150"
+                FlowColumnCount="3"
+                SeparatorVisibility="Default"   
+                HasUnevenRows="True"  
+                FlowItemTappedCommand="{Binding ItemTappedCommand}"   
+                FlowItemsSource="{Binding Items}">
+
+            <flv:FlowListView.FlowColumnTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="LightGray"
+                           Margin="5">
+                        <StackLayout HeightRequest="75">
+                            <Label HorizontalOptions="Fill"
+                               VerticalOptions="Fill"
+                               TextColor="Gray"
+                               XAlign="Center"
+                               YAlign="Center"
+                               Text="{Binding Duree}"/>
+                            <Label HorizontalOptions="Fill"
+                               VerticalOptions="Fill"
+                               TextColor="Gray"
+                               XAlign="Center"
+                               YAlign="Center"
+                               Text="{Binding Prix}"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </flv:FlowListView.FlowColumnTemplate>
+        </flv:FlowListView>
+    </StackLayout>
+</ContentPage>
