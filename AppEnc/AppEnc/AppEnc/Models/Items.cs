@@ -7,7 +7,6 @@ using Xamarin.Forms;
 
 namespace AppEnc.Views
 {
-
     public class MenuItem
     {
         public int Id { get; set; }
@@ -30,5 +29,11 @@ namespace AppEnc.Views
     {
         public int Prix { get; set; }
         public int Duree { get; set; }
+    }
+
+    public class Paiement
+    {
+        public String MoyenPaiement { get; set; }
+        public String Date { get; set; }
     }
 }

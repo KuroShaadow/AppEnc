@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\PaiementPageDetail.xaml.cs">
+      <DependentUpon>PaiementPageDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\VoituresPageDetail.xaml.cs">
       <DependentUpon>VoituresPageDetail.xaml</DependentUpon>
     </Compile>
@@ -26,6 +29,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MainPageMaster.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PaiementPageDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -55,9 +55,11 @@ namespace AppEnc.ViewsModels
     public class PrixViewModel : BindableObject
     {
         private MainPage MainPage;
+        private Item Item;
 
-        public PrixViewModel(MainPage mainPage)
+        public PrixViewModel(Item item, MainPage mainPage)
         {
+            Item = item;
             MainPage = mainPage;
             AddItems();
         }
@@ -74,6 +76,54 @@ namespace AppEnc.ViewsModels
 
         private ObservableCollection<DureePrix> _items = new ObservableCollection<DureePrix>();
         public ObservableCollection<DureePrix> Items
+        {
+            get
+            {
+                return _items;
+            }
+            set
+            {
+                if (_items != value)
+                {
+                    _items = value;
+                    OnPropertyChanged(nameof(Items));
+                }
+            }
+        }
+
+        public Command ItemTappedCommand
+        {
+            get
+            {
+                return new Command(async (data) =>
+                {
+                    await MainPage.Detail.Navigation.PushAsync(new PaiementPageDetail(Item, MainPage));
+                });
+            }
+        }
+    }
+
+    public class PaiementViewModel : BindableObject
+    {
+        private MainPage MainPage;
+        private Item Item;
+
+        public PaiementViewModel(Item item, MainPage mainPage)
+        {
+            Item = item;
+            MainPage = mainPage;
+            AddItems();
+        }
+
+        private void AddItems()
+        {
+            Items.Add(new Paiement { MoyenPaiement = "Carte Bancaire", Date = "" });
+            Items.Add(new Paiement { MoyenPaiement = "Espèce", Date = "" });
+            Items.Add(new Paiement { MoyenPaiement = "Cheque", Date = "" });
+        }
+
+        private ObservableCollection<Paiement> _items = new ObservableCollection<Paiement>();
+        public ObservableCollection<Paiement> Items
         {
             get
             {
