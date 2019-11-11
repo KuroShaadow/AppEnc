@@ -14,10 +14,10 @@ namespace AppEnc.Views
     public partial class PrixPageDetail : ContentPage
     {
         PrixViewModel pageModel;
-        public PrixPageDetail(Item item, MainPage main)
+        public PrixPageDetail(Item item)
         {
             InitializeComponent();
-            BindingContext = pageModel = new PrixViewModel(item, main);
+            BindingContext = pageModel = new PrixViewModel(item, Navigation);
         }
     }
 }

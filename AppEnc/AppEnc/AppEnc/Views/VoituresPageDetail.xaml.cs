@@ -14,11 +14,10 @@ namespace AppEnc.Views
     public partial class VoituresPageDetail : ContentPage
     {
         VoituresViewModel pageModel;
-        public VoituresPageDetail(MainPage main)
+        public VoituresPageDetail(INavigation navigation)
         {
             InitializeComponent();
-            pageModel = new VoituresViewModel(main);
-            BindingContext = pageModel;
+            BindingContext = pageModel = new VoituresViewModel(Navigation);
         }
     }
 }
