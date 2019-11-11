@@ -14,10 +14,10 @@ namespace AppEnc.Views
     public partial class PaiementPageDetail : ContentPage
     {
         PaiementViewModel pageModel;
-        public PaiementPageDetail(Item item, MainPage main)
+        public PaiementPageDetail(Item item)
         {
             InitializeComponent();
-            BindingContext = pageModel = new PaiementViewModel(item, main);
+            BindingContext = pageModel = new PaiementViewModel(item, Navigation);
         }
     }
 }

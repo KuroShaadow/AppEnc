@@ -17,6 +17,7 @@ namespace AppEnc.Views
     {
         public Voiture Vehicule { get; set; }
         public DureePrix Prix { get; set; }
+        public Formulaire Form { get; set; }
     }
 
     public class Voiture
@@ -34,6 +35,12 @@ namespace AppEnc.Views
     public class Paiement
     {
         public String MoyenPaiement { get; set; }
-        public String Date { get; set; }
+    }
+
+    public class Formulaire
+    {
+        public String Prenom { get; set; }
+        public String Nom { get; set; }
+        public String Email { get; set; }
     }
 }

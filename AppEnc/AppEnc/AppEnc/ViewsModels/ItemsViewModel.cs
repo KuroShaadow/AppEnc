@@ -54,13 +54,13 @@ namespace AppEnc.ViewsModels
 
     public class PrixViewModel : BindableObject
     {
-        private MainPage MainPage;
+        private NavigationPage Navigation;
         private Item Item;
 
-        public PrixViewModel(Item item, MainPage mainPage)
+        public PrixViewModel(Item item, NavigationPage navigation)
         {
             Item = item;
-            MainPage = mainPage;
+            Navigation = navigation;
             AddItems();
         }
 
@@ -97,7 +97,7 @@ namespace AppEnc.ViewsModels
             {
                 return new Command(async (data) =>
                 {
-                    await MainPage.Detail.Navigation.PushAsync(new PaiementPageDetail(Item, MainPage));
+                    await Navigation.PushAsync(new PaiementPageDetail(Item, Navigation));
                 });
             }
         }
@@ -105,21 +105,21 @@ namespace AppEnc.ViewsModels
 
     public class PaiementViewModel : BindableObject
     {
-        private MainPage MainPage;
+        private NavigationPage Navigation;
         private Item Item;
 
-        public PaiementViewModel(Item item, MainPage mainPage)
+        public PaiementViewModel(Item item, NavigationPage navigation)
         {
             Item = item;
-            MainPage = mainPage;
+            Navigation = navigation;
             AddItems();
         }
 
         private void AddItems()
         {
-            Items.Add(new Paiement { MoyenPaiement = "Carte Bancaire", Date = "" });
-            Items.Add(new Paiement { MoyenPaiement = "Espèce", Date = "" });
-            Items.Add(new Paiement { MoyenPaiement = "Cheque", Date = "" });
+            Items.Add(new Paiement { MoyenPaiement = "Carte Bancaire" });
+            Items.Add(new Paiement { MoyenPaiement = "Espèce" });
+            Items.Add(new Paiement { MoyenPaiement = "Cheque" });
         }
 
         private ObservableCollection<Paiement> _items = new ObservableCollection<Paiement>();
@@ -143,9 +143,9 @@ namespace AppEnc.ViewsModels
         {
             get
             {
-                return new Command((data) =>
+                return new Command(async (data) =>
                 {
-                    MainPage.DisplayAlert("FlowListView", data + "", "Ok");
+                    await MainPage.Detail.Navigation.PushAsync(new FormPageDetail(Item));
                 });
             }
         }

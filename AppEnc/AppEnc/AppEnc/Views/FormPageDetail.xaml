@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="AppEnc.Views.FormPageDetail">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Valider" Clicked="Valider" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <Label Text="Prénom : " FontSize="Title"/>
+        <Entry x:Name="Prenom" Completed="Entry_Completed" ReturnType="Next"/>
+        <Label Text="Nom : " FontSize="Title"/>
+        <Entry x:Name="Nom" Completed="Entry_Completed" ReturnType="Next"/>
+        <Label Text="Email : " FontSize="Title"/>
+        <Entry x:Name="Mail" Keyboard="Email" Completed="Entry_Completed" ReturnType="Done"/>
+    </StackLayout>
+</ContentPage>
