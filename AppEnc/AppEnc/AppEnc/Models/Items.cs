@@ -24,6 +24,7 @@ namespace AppEnc.Views
     {
         public Image Photo { get; set; }
         public int Imatriculation { get; set; }
+        public String Lieu { get; set; }
     }
 
     public class DureePrix
