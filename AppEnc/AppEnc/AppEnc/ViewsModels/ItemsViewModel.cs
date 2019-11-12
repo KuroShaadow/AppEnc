@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace AppEnc.ViewsModels
@@ -46,8 +48,28 @@ namespace AppEnc.ViewsModels
             {
                 return new Command(async (data) =>
                 {
-                    await Navigation.PushAsync(new PrixPageDetail(new Item { Vehicule = data as Voiture }));
+                    await test();
+                    //Navigation.PushAsync(new PrixPageDetail(new Item { Vehicule = data as Voiture }));
                 });
+            }
+        }
+
+        static readonly HttpClient client = new HttpClient();
+
+        static async Task test()
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("http://www.google.com/");
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                Console.WriteLine(responseBody);
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine("\nException Caught!");
+                Console.WriteLine("Message :{0} ", e.Message);
             }
         }
     }
