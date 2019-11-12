@@ -16,7 +16,7 @@ namespace AppEnc.Views
         {
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
-            Detail = new NavigationPage(new VoituresPageDetail(this));
+            Detail = new NavigationPage(new VoituresPageDetail(Navigation));
 
         }
 

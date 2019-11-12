@@ -9,11 +9,11 @@ namespace AppEnc.ViewsModels
 {
     public class VoituresViewModel : BindableObject
     {
-        private MainPage MainPage;
+        private INavigation Navigation;
 
-        public VoituresViewModel(MainPage mainPage)
+        public VoituresViewModel(INavigation navigation)
         {
-            MainPage = mainPage;
+            Navigation = navigation;
             AddItems();
         }
 
@@ -46,7 +46,7 @@ namespace AppEnc.ViewsModels
             {
                 return new Command(async (data) =>
                 {
-                    await MainPage.Detail.Navigation.PushAsync(new PrixPageDetail(new Item { Vehicule = data as Voiture }, MainPage));
+                    await Navigation.PushAsync(new PrixPageDetail(new Item { Vehicule = data as Voiture }));
                 });
             }
         }
@@ -54,10 +54,10 @@ namespace AppEnc.ViewsModels
 
     public class PrixViewModel : BindableObject
     {
-        private NavigationPage Navigation;
+        private INavigation Navigation;
         private Item Item;
 
-        public PrixViewModel(Item item, NavigationPage navigation)
+        public PrixViewModel(Item item, INavigation navigation)
         {
             Item = item;
             Navigation = navigation;
@@ -97,7 +97,7 @@ namespace AppEnc.ViewsModels
             {
                 return new Command(async (data) =>
                 {
-                    await Navigation.PushAsync(new PaiementPageDetail(Item, Navigation));
+                    await Navigation.PushAsync(new PaiementPageDetail(Item));
                 });
             }
         }
@@ -105,10 +105,10 @@ namespace AppEnc.ViewsModels
 
     public class PaiementViewModel : BindableObject
     {
-        private NavigationPage Navigation;
+        private INavigation Navigation;
         private Item Item;
 
-        public PaiementViewModel(Item item, NavigationPage navigation)
+        public PaiementViewModel(Item item, INavigation navigation)
         {
             Item = item;
             Navigation = navigation;
@@ -145,7 +145,7 @@ namespace AppEnc.ViewsModels
             {
                 return new Command(async (data) =>
                 {
-                    await MainPage.Detail.Navigation.PushAsync(new FormPageDetail(Item));
+                    await Navigation.PushAsync(new FormPageDetail(Item));
                 });
             }
         }

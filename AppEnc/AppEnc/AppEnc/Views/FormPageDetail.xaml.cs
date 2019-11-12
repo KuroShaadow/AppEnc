@@ -15,7 +15,7 @@ namespace AppEnc.Views
     public partial class FormPageDetail : ContentPage
     {
         Item Item;
-        public FormPageDetail(Item item, MainPage)
+        public FormPageDetail(Item item)
         {
             Item = item;
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace AppEnc.Views
                 smtpServer.Send(mail);
             }
             catch(Exception){}
-            await Navigation.PushModalAsync(new VoituresPageDetail());
+            await Navigation.PopToRootAsync();
         }
     }
 }
