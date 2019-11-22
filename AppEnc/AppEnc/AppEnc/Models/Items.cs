@@ -22,9 +22,9 @@ namespace AppEnc.Views
 
     public class Voiture
     {
-        public Image Photo { get; set; }
+        public string Photo { get; set; }
         public int Imatriculation { get; set; }
-        public String Lieu { get; set; }
+        public string Lieu { get; set; }
     }
 
     public class DureePrix

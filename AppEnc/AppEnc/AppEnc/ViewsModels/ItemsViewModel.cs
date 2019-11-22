@@ -1,7 +1,11 @@
 ﻿using AppEnc.Views;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,16 +17,58 @@ namespace AppEnc.ViewsModels
     {
         private INavigation Navigation;
 
+        bool isBusy = false;
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                OnPropertyChanged(nameof(IsBusy));
+            }
+        }
+
+        public Command LoadItemsCommand
+        {
+            get
+            {
+                return new Command( () => 
+                {
+                    IsBusy = true;
+                    Items.Clear();
+                    AddItems();
+                    IsBusy = false;
+                });
+            }
+        }
+
         public VoituresViewModel(INavigation navigation)
         {
             Navigation = navigation;
             AddItems();
         }
 
-        private void AddItems()
+        private async void AddItems()
         {
-            for (int i = 0; i < 20; i++)
-                Items.Add(new Voiture() { Imatriculation = i * 1000, Photo = new Image() }) ;
+            WebRequest request = WebRequest.Create("http://172.28.134.73/");
+            request.Credentials = CredentialCache.DefaultCredentials;
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            WebResponse response = request.GetResponse();
+            using (Stream dataStream = response.GetResponseStream())
+            {
+                StreamReader reader = new StreamReader(dataStream);
+                JObject json = JObject.Parse(await reader.ReadToEndAsync());
+                foreach (JObject voiture in (JArray)json.GetValue("voiture"))
+                {
+                    Items.Add(new Voiture
+                    {
+                        Imatriculation = (int)voiture.GetValue("immatriculation"),
+                        Photo = (string)voiture.GetValue("photo"),
+                        Lieu = (string)voiture.GetValue("lieu")
+                    });
+                }
+            }
         }
 
         private ObservableCollection<Voiture> _items = new ObservableCollection<Voiture>();
@@ -48,28 +94,9 @@ namespace AppEnc.ViewsModels
             {
                 return new Command(async (data) =>
                 {
-                    await test();
+                    await Navigation.PushAsync(new PrixPageDetail(new Item { Vehicule = (Voiture)data }));
                     //Navigation.PushAsync(new PrixPageDetail(new Item { Vehicule = data as Voiture }));
                 });
-            }
-        }
-
-        static readonly HttpClient client = new HttpClient();
-
-        static async Task test()
-        {
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync("http://www.google.com/");
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-                Console.WriteLine(responseBody);
-            }
-            catch (HttpRequestException e)
-            {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
             }
         }
     }

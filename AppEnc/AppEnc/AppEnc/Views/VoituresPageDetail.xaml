@@ -9,8 +9,11 @@
     <StackLayout Padding="10">
         <flv:FlowListView FlowColumnMinWidth="150"  
                             SeparatorVisibility="Default"   
-                            HasUnevenRows="True"  
-                            FlowItemTappedCommand="{Binding ItemTappedCommand}"   
+                            HasUnevenRows="True"
+                            RefreshCommand="{Binding LoadItemsCommand}"
+                            IsPullToRefreshEnabled="true"
+                            IsRefreshing="{Binding IsBusy}"
+                            FlowItemTappedCommand="{Binding ItemTappedCommand}"
                             FlowItemsSource="{Binding Items}">
 
             <flv:FlowListView.FlowColumnTemplate>
@@ -19,7 +22,7 @@
                            Margin="5"
                            HeightRequest="75">
                         <StackLayout>
-                            <Image Source="voiture.jpg"/>
+                            <Image Source="{Binding Photo}"/>
                             <Label TextColor="Black"
                                    XAlign="Center"
                                    YAlign="Center"
