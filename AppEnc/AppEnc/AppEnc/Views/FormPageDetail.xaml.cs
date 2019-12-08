@@ -29,21 +29,24 @@ namespace AppEnc.Views
 
         public async void Valider(object sender, EventArgs e)
         {
-            MailMessage mail = new MailMessage("monpetit.petittest@gmail.com", Item.Form.Email, "Test", Item.ToString());
-            SmtpClient smtpServer = new SmtpClient
+            if (Item.Form != null)
             {
-                Port = 587,
-                Host = "smtp.gmail.com",
-                EnableSsl = true,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("monpetit.petittest@gmail.com", "Test*1234")
-            };
-            try
-            {
-                smtpServer.Send(mail);
+                MailMessage mail = new MailMessage("monpetit.petittest@gmail.com", Item.Form.Email, "Test", Item.ToString());
+                SmtpClient smtpServer = new SmtpClient
+                {
+                    Port = 587,
+                    Host = "smtp.gmail.com",
+                    EnableSsl = true,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential("monpetit.petittest@gmail.com", "Test*1234")
+                };
+                try
+                {
+                    smtpServer.Send(mail);
+                }
+                catch (Exception) { }
+                await Navigation.PopToRootAsync();
             }
-            catch(Exception){}
-            await Navigation.PopToRootAsync();
         }
     }
 }

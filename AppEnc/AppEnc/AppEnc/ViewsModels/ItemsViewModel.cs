@@ -50,7 +50,7 @@ namespace AppEnc.ViewsModels
 
         private async void AddItems()
         {
-            WebRequest request = WebRequest.Create("http://172.28.134.73/");
+            WebRequest request = WebRequest.Create("http://192.168.0.26/");
             request.Credentials = CredentialCache.DefaultCredentials;
             request.Method = "GET";
             request.ContentType = "application/json";
