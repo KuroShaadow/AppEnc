@@ -61,12 +61,18 @@ namespace AppEnc.ViewsModels
                 JObject json = JObject.Parse(await reader.ReadToEndAsync());
                 foreach (JObject voiture in (JArray)json.GetValue("voiture"))
                 {
-                    Items.Add(new Voiture
+                    if ((int)voiture.GetValue("reservation") != -1 && ((int)voiture.GetValue("reservation") + (int)voiture.GetValue("duree")) % 60 == DateTime.Now.Minute)
                     {
-                        Imatriculation = (int)voiture.GetValue("immatriculation"),
-                        Photo = (string)voiture.GetValue("photo"),
-                        Lieu = (string)voiture.GetValue("lieu")
-                    });
+                        request = WebRequest.Create("http://192.168.0.26/?retour=1&immatriculation=" + voiture.GetValue("immatriculation"));
+                    }
+                    if ((int)voiture.GetValue("duree") == 0) {
+                        Items.Add(new Voiture
+                        {
+                            Imatriculation = (int)voiture.GetValue("immatriculation"),
+                            Photo = (string)voiture.GetValue("photo"),
+                            Lieu = (string)voiture.GetValue("lieu")
+                        });
+                    }
                 }
             }
         }

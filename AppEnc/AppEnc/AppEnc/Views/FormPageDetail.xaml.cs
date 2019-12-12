@@ -43,6 +43,7 @@ namespace AppEnc.Views
                 try
                 {
                     smtpServer.Send(mail);
+                    WebRequest request = WebRequest.Create("http://192.168.0.26/?immatriculation=" + Item.Vehicule.Imatriculation + "&reservation=" + DateTime.Now.Minute + "&duree=" + Item.Prix.Duree);
                 }
                 catch (Exception) { }
                 await Navigation.PopToRootAsync();
