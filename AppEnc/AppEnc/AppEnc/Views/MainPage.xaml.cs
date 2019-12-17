@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,14 +12,13 @@ namespace AppEnc.Views
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
 
-            Detail = new NavigationPage(new VoituresPageDetail(Navigation));
+            Detail = new NavigationPage(new VoituresPageDetail());
 
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem as MenuItem;
-            if (item == null)
+            if (!(e.SelectedItem is MenuItem))
                 return;
 
             Detail = new MainPage();
