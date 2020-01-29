@@ -8,6 +8,7 @@
              x:Class="AppEnc.Views.VoituresPageDetail">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Supprimer" Clicked="SupprItemCommand" />
         <ToolbarItem Text="Ajouter" Clicked="AddItemCommand" />
     </ContentPage.ToolbarItems>
 

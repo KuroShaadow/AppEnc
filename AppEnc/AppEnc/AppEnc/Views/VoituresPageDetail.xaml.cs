@@ -21,9 +21,15 @@ namespace AppEnc.Views
             base.OnAppearing();
             pageModel.OnAppearing();
         }
+
         public async void AddItemCommand(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AddVoiturePage());
+        }
+
+        public async void SupprItemCommand(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SupprVoiturePage());
         }
     }
 }

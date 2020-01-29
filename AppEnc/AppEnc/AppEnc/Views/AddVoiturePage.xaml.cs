@@ -26,7 +26,7 @@ namespace AppEnc.Views
             {
                 Name = "image.jpg",
                 SaveToAlbum = false,
-                MaxWidthHeight = 150
+                RotateImage = false
             });
             if (file != null)
             {
@@ -41,18 +41,20 @@ namespace AppEnc.Views
             {
                 var client = new HttpClient();
                 var content = new MultipartFormDataContent
-            {
-                { new StreamContent(PhotoImage.GetStream()), "\"image\"", $"\"{ PhotoImage.Path}\"" }
-            };
+                    {
+                        { new StreamContent(PhotoImage.GetStream()), "\"image\"", $"\"{ PhotoImage.Path}\"" }
+                    };
                 await client.PostAsync("http://192.168.0.24/?add=1&immatriculation=" + Immatriculation.Text, content);
+
+                await Navigation.PopAsync();
             }
             else
             {
                 WebRequest request = WebRequest.Create("http://192.168.0.24/?add=1&immatriculation=" + Immatriculation.Text);
                 request.GetResponse();
-            }
 
-            await Navigation.PopAsync();
+                await Navigation.PopAsync();
+            }
         }
     }
 }
