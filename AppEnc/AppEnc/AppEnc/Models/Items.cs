@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace AppEnc.Views
 {
@@ -17,12 +12,13 @@ namespace AppEnc.Views
     {
         public Voiture Vehicule { get; set; }
         public DureePrix Prix { get; set; }
+        public Paiement Paiement { get; set; }
         public Formulaire Form { get; set; }
     }
 
     public class Voiture
     {
-        public string Photo { get; set; }
+        public String Photo { get; set; }
         public int Imatriculation { get; set; }
         public string Lieu { get; set; }
     }

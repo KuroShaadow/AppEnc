@@ -6,6 +6,12 @@
              mc:Ignorable="d"
              xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
              x:Class="AppEnc.Views.VoituresPageDetail">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Supprimer" Clicked="SupprItemCommand" />
+        <ToolbarItem Text="Ajouter" Clicked="AddItemCommand" />
+    </ContentPage.ToolbarItems>
+
     <StackLayout Padding="10">
         <flv:FlowListView FlowColumnMinWidth="150"  
                             SeparatorVisibility="Default"   
@@ -15,14 +21,12 @@
                             IsRefreshing="{Binding IsBusy}"
                             FlowItemTappedCommand="{Binding ItemTappedCommand}"
                             FlowItemsSource="{Binding Items}">
-
             <flv:FlowListView.FlowColumnTemplate>
                 <DataTemplate>
                     <Frame BackgroundColor="LightGray"
-                           Margin="5"
-                           HeightRequest="75">
+                           Margin="5">
                         <StackLayout>
-                            <Image Source="{Binding Photo}"/>
+                            <Image Source="{Binding Photo}" HeightRequest="50"/>
                             <Label TextColor="Black"
                                    XAlign="Center"
                                    YAlign="Center"

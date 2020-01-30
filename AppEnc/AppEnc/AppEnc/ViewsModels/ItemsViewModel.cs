@@ -1,56 +1,25 @@
 ﻿using AppEnc.Views;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace AppEnc.ViewsModels
 {
     public class VoituresViewModel : BindableObject
     {
-        private INavigation Navigation;
-
-        bool isBusy = false;
-        public bool IsBusy
-        {
-            get { return isBusy; }
-            set
-            {
-                isBusy = value;
-                OnPropertyChanged(nameof(IsBusy));
-            }
-        }
-
-        public Command LoadItemsCommand
-        {
-            get
-            {
-                return new Command( () => 
-                {
-                    IsBusy = true;
-                    Items.Clear();
-                    AddItems();
-                    IsBusy = false;
-                });
-            }
-        }
+        private readonly INavigation Navigation;
 
         public VoituresViewModel(INavigation navigation)
         {
             Navigation = navigation;
-            AddItems();
         }
 
         private async void AddItems()
         {
-            WebRequest request = WebRequest.Create("http://192.168.0.26/");
+            WebRequest request = WebRequest.Create("http://192.168.0.24/");
             request.Credentials = CredentialCache.DefaultCredentials;
             request.Method = "GET";
             request.ContentType = "application/json";
@@ -61,20 +30,34 @@ namespace AppEnc.ViewsModels
                 JObject json = JObject.Parse(await reader.ReadToEndAsync());
                 foreach (JObject voiture in (JArray)json.GetValue("voiture"))
                 {
-                    if ((int)voiture.GetValue("reservation") != -1 && ((int)voiture.GetValue("reservation") + (int)voiture.GetValue("duree")) % 60 == DateTime.Now.Minute)
+                    int reservation = (int)voiture.GetValue("reservation");
+                    int immatriculation = (int)voiture.GetValue("immatriculation");
+                    int duree = (int)voiture.GetValue("duree");
+                    string photo = "http://192.168.0.24/images/" + (string)voiture.GetValue("photo");
+                    string lieu = (string)voiture.GetValue("lieu");
+
+                    if (reservation != -1 && (reservation + duree) <= DateTime.Now.Hour * 60 + DateTime.Now.Minute)
                     {
-                        request = WebRequest.Create("http://192.168.0.26/?retour=1&immatriculation=" + voiture.GetValue("immatriculation"));
+                        request = WebRequest.Create("http://192.168.0.24/?retour=1&immatriculation=" + immatriculation);
+                        request.GetResponse();
                     }
-                    if ((int)voiture.GetValue("duree") == 0) {
+                    if (reservation == -1)
+                    {
                         Items.Add(new Voiture
                         {
-                            Imatriculation = (int)voiture.GetValue("immatriculation"),
-                            Photo = (string)voiture.GetValue("photo"),
-                            Lieu = (string)voiture.GetValue("lieu")
+                            Imatriculation = immatriculation,
+                            Photo = photo,
+                            Lieu = lieu
                         });
                     }
                 }
             }
+        }
+
+        public void OnAppearing()
+        {
+            Items.Clear();
+            AddItems();
         }
 
         private ObservableCollection<Voiture> _items = new ObservableCollection<Voiture>();
@@ -94,6 +77,30 @@ namespace AppEnc.ViewsModels
             }
         }
 
+        bool isBusy = false;
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                OnPropertyChanged(nameof(IsBusy));
+            }
+        }
+
+        public Command LoadItemsCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    IsBusy = true;
+                    OnAppearing();
+                    IsBusy = false;
+                });
+            }
+        }
+
         public Command ItemTappedCommand
         {
             get
@@ -101,7 +108,6 @@ namespace AppEnc.ViewsModels
                 return new Command(async (data) =>
                 {
                     await Navigation.PushAsync(new PrixPageDetail(new Item { Vehicule = (Voiture)data }));
-                    //Navigation.PushAsync(new PrixPageDetail(new Item { Vehicule = data as Voiture }));
                 });
             }
         }
@@ -109,8 +115,8 @@ namespace AppEnc.ViewsModels
 
     public class PrixViewModel : BindableObject
     {
-        private INavigation Navigation;
-        private Item Item;
+        private readonly INavigation Navigation;
+        private readonly Item Item;
 
         public PrixViewModel(Item item, INavigation navigation)
         {
@@ -121,7 +127,7 @@ namespace AppEnc.ViewsModels
 
         private void AddItems()
         {
-            Items.Add(new DureePrix() { Duree = 7, Prix = 5 });
+            Items.Add(new DureePrix() { Duree = 1, Prix = 5 });
             Items.Add(new DureePrix() { Duree = 15, Prix = 8 });
             Items.Add(new DureePrix() { Duree = 20, Prix = 10 });
             Items.Add(new DureePrix() { Duree = 30, Prix = 15 });
@@ -152,6 +158,7 @@ namespace AppEnc.ViewsModels
             {
                 return new Command(async (data) =>
                 {
+                    Item.Prix = (DureePrix)data;
                     await Navigation.PushAsync(new PaiementPageDetail(Item));
                 });
             }
@@ -160,8 +167,8 @@ namespace AppEnc.ViewsModels
 
     public class PaiementViewModel : BindableObject
     {
-        private INavigation Navigation;
-        private Item Item;
+        private readonly INavigation Navigation;
+        private readonly Item Item;
 
         public PaiementViewModel(Item item, INavigation navigation)
         {
@@ -200,6 +207,7 @@ namespace AppEnc.ViewsModels
             {
                 return new Command(async (data) =>
                 {
+                    Item.Paiement = (Paiement)data;
                     await Navigation.PushAsync(new FormPageDetail(Item));
                 });
             }

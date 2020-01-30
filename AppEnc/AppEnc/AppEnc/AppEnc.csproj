@@ -12,16 +12,31 @@
   <ItemGroup>
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.11" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991477" />
+    <PackageReference Include="Plugin.FileUploader" Version="1.4.0" />
+    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Mono.Android">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v9.0\Mono.Android.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\SupprVoiturePage.xaml.cs">
+      <DependentUpon>SupprVoiturePage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\FormPageDetail.xaml.cs">
       <DependentUpon>FormPageDetail.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\PaiementPageDetail.xaml.cs">
       <DependentUpon>PaiementPageDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AddVoiturePage.xaml.cs">
+      <DependentUpon>AddVoiturePage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\VoituresPageDetail.xaml.cs">
       <DependentUpon>VoituresPageDetail.xaml</DependentUpon>
@@ -39,6 +54,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\PaiementPageDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AddVoiturePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
