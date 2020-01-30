@@ -31,7 +31,7 @@ namespace AppEnc.ViewsModels
                 foreach (JObject voiture in (JArray)json.GetValue("voiture"))
                 {
                     int reservation = (int)voiture.GetValue("reservation");
-                    int immatriculation = (int)voiture.GetValue("immatriculation");
+                    string immatriculation = (string)voiture.GetValue("immatriculation");
                     int duree = (int)voiture.GetValue("duree");
                     string photo = "http://127.0.0.1:1234/~berthel/images/" + (string)voiture.GetValue("photo");
                     string lieu = (string)voiture.GetValue("lieu");

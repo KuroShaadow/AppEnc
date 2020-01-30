@@ -13,20 +13,29 @@ namespace AppEnc.Views
         public FormPageDetail(Item item)
         {
             Item = item;
+            Item.Form = new Formulaire();
             InitializeComponent();
         }
 
         public void Entry_Completed(Object sender, EventArgs e)
         {
-            if (Prenom.Text != null && Nom.Text != null && Mail.Text != null)
-                Item.Form = new Formulaire { Prenom = Prenom.Text, Nom = Nom.Text, Email = Mail.Text };
+            if (Prenom.Text != null)
+                Item.Form.Prenom = Prenom.Text;
+            if (Nom.Text != null)
+                Item.Form.Nom = Nom.Text;
+            if (Mail.Text != null)
+                Item.Form.Email = Mail.Text;
         }
 
         public async void Valider(object sender, EventArgs e)
         {
-            if (Item.Form != null)
+            if (Item.Form.Prenom != null && Item.Form.Nom != null && Item.Form.Email != null)
             {
-                MailMessage mail = new MailMessage("monpetit.petittest@gmail.com", Item.Form.Email, "Test", Item.ToString());
+                string contentMail = "Véhicule : " + Item.Vehicule.Imatriculation +
+                                    "\nDurée : " + Item.Prix.Duree +
+                                    "\nPrix : " + Item.Prix.Prix +
+                                    "\nMoyen de Paiement : " + Item.Paiement.MoyenPaiement;
+                MailMessage mail = new MailMessage("monpetit.petittest@gmail.com", Item.Form.Email, "Reçu reservation véhicule", contentMail);
                 SmtpClient smtpServer = new SmtpClient
                 {
                     Port = 587,
@@ -43,6 +52,18 @@ namespace AppEnc.Views
                 }
                 catch (Exception) { }
                 await Navigation.PopToRootAsync();
+            }
+            else
+            {
+                string incomplet = "";
+                if (Item.Form.Prenom == null)
+                    incomplet += "Prenom";
+                if (Item.Form.Nom == null)
+                    incomplet += (Item.Form.Prenom == null ? ", " : "") + "Nom";
+                if (Item.Form.Email == null)
+                    incomplet += (Item.Form.Prenom == null || Item.Form.Nom == null ? ", " : "") + "Email";
+
+                await DisplayAlert("Formulaire incomplet", incomplet, "Retour");
             }
         }
     }

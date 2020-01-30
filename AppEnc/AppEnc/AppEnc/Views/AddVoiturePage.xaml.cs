@@ -36,7 +36,6 @@ namespace AppEnc.Views
 
         public async void Valider(object sender, EventArgs e)
         {
-
             if (PhotoImage != null)
             {
                 var client = new HttpClient();

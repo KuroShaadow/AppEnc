@@ -18,8 +18,8 @@ namespace AppEnc.Views
 
     public class Voiture
     {
-        public String Photo { get; set; }
-        public int Imatriculation { get; set; }
+        public string Photo { get; set; }
+        public string Imatriculation { get; set; }
         public string Lieu { get; set; }
     }
 
