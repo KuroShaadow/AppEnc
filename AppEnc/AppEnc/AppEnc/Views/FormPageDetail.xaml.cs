@@ -13,23 +13,18 @@ namespace AppEnc.Views
         public FormPageDetail(Item item)
         {
             Item = item;
-            Item.Form = new Formulaire();
             InitializeComponent();
         }
 
         public void Entry_Completed(Object sender, EventArgs e)
         {
-            if (Prenom.Text != null)
-                Item.Form.Prenom = Prenom.Text;
-            if (Nom.Text != null)
-                Item.Form.Nom = Nom.Text;
-            if (Mail.Text != null)
-                Item.Form.Email = Mail.Text;
+            if (Prenom.Text != null && Nom.Text != null && Mail.Text != null)
+                Item.Form = new Formulaire { Prenom = Prenom.Text, Nom = Nom.Text, Email = Mail.Text };
         }
 
         public async void Valider(object sender, EventArgs e)
         {
-            if (Item.Form.Prenom != null && Item.Form.Nom != null && Item.Form.Email != null)
+            if (Item.Form != null)
             {
                 MailMessage mail = new MailMessage("monpetit.petittest@gmail.com", Item.Form.Email, "Test", Item.ToString());
                 SmtpClient smtpServer = new SmtpClient
@@ -48,17 +43,6 @@ namespace AppEnc.Views
                 }
                 catch (Exception) { }
                 await Navigation.PopToRootAsync();
-            }
-            else
-            {
-                string incomplet = "";
-                if (Prenom.Text != null)
-                    incomplet += "Prenom manquant";
-                if (Nom.Text != null)
-                    incomplet += !incomplet.Equals("") ? "\n" : "" + "Nom manquant";
-                if (Mail.Text != null)
-                    incomplet += !incomplet.Equals("") ? "\n" : "" + "Mail manquant";
-                await DisplayAlert("Informations incomplètes", incomplet, "Ok");
             }
         }
     }

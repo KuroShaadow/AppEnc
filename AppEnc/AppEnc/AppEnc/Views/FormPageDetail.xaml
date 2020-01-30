@@ -11,9 +11,9 @@
 
     <StackLayout>
         <Label Text="Prénom : " FontSize="Title"/>
-        <Entry x:Name="Prenom" Completed="Entry_Completed" ReturnType="Done"/>
+        <Entry x:Name="Prenom" Completed="Entry_Completed" ReturnType="Next"/>
         <Label Text="Nom : " FontSize="Title"/>
-        <Entry x:Name="Nom" Completed="Entry_Completed" ReturnType="Done"/>
+        <Entry x:Name="Nom" Completed="Entry_Completed" ReturnType="Next"/>
         <Label Text="Email : " FontSize="Title"/>
         <Entry x:Name="Mail" Keyboard="Email" Completed="Entry_Completed" ReturnType="Done"/>
     </StackLayout>

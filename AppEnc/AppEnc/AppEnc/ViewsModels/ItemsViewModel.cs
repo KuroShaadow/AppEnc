@@ -127,7 +127,7 @@ namespace AppEnc.ViewsModels
 
         private void AddItems()
         {
-            Items.Add(new DureePrix() { Duree = 1, Prix = 5 });
+            Items.Add(new DureePrix() { Duree = 7, Prix = 5 });
             Items.Add(new DureePrix() { Duree = 15, Prix = 8 });
             Items.Add(new DureePrix() { Duree = 20, Prix = 10 });
             Items.Add(new DureePrix() { Duree = 30, Prix = 15 });
