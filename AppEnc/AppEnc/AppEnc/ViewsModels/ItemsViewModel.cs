@@ -19,7 +19,7 @@ namespace AppEnc.ViewsModels
 
         private async void AddItems()
         {
-            WebRequest request = WebRequest.Create("http://192.168.0.24/");
+            WebRequest request = WebRequest.Create("http://127.0.0.1:1234/~berthel/");
             request.Credentials = CredentialCache.DefaultCredentials;
             request.Method = "GET";
             request.ContentType = "application/json";
@@ -33,12 +33,12 @@ namespace AppEnc.ViewsModels
                     int reservation = (int)voiture.GetValue("reservation");
                     int immatriculation = (int)voiture.GetValue("immatriculation");
                     int duree = (int)voiture.GetValue("duree");
-                    string photo = "http://192.168.0.24/images/" + (string)voiture.GetValue("photo");
+                    string photo = "http://127.0.0.1:1234/~berthel/images/" + (string)voiture.GetValue("photo");
                     string lieu = (string)voiture.GetValue("lieu");
 
                     if (reservation != -1 && (reservation + duree) <= DateTime.Now.Hour * 60 + DateTime.Now.Minute)
                     {
-                        request = WebRequest.Create("http://192.168.0.24/?retour=1&immatriculation=" + immatriculation);
+                        request = WebRequest.Create("http://127.0.0.1:1234/~berthel/?retour=1&immatriculation=" + immatriculation);
                         request.GetResponse();
                     }
                     if (reservation == -1)

@@ -21,7 +21,7 @@ namespace AppEnc.Views
         {
             if (Immatriculation != null)
             {
-                WebRequest request = WebRequest.Create("http://192.168.0.24/?suppr=1&immatriculation=" + Immatriculation.Text);
+                WebRequest request = WebRequest.Create("http://127.0.0.1:1234/~berthel/?suppr=1&immatriculation=" + Immatriculation.Text);
                 request.GetResponse();
                 await Navigation.PopAsync();
             }

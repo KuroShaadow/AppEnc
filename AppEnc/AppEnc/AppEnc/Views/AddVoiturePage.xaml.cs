@@ -44,13 +44,13 @@ namespace AppEnc.Views
                     {
                         { new StreamContent(PhotoImage.GetStream()), "\"image\"", $"\"{ PhotoImage.Path}\"" }
                     };
-                await client.PostAsync("http://192.168.0.24/?add=1&immatriculation=" + Immatriculation.Text, content);
+                await client.PostAsync("http://127.0.0.1:1234/~berthel/?add=1&immatriculation=" + Immatriculation.Text, content);
 
                 await Navigation.PopAsync();
             }
             else
             {
-                WebRequest request = WebRequest.Create("http://192.168.0.24/?add=1&immatriculation=" + Immatriculation.Text);
+                WebRequest request = WebRequest.Create("http://127.0.0.1:1234/~berthel/?add=1&immatriculation=" + Immatriculation.Text);
                 request.GetResponse();
 
                 await Navigation.PopAsync();

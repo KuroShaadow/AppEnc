@@ -35,7 +35,7 @@ namespace AppEnc.Views
                     UseDefaultCredentials = false,
                     Credentials = new NetworkCredential("monpetit.petittest@gmail.com", "Test*1234")
                 };
-                WebRequest request = WebRequest.Create("http://192.168.0.24/?immatriculation=" + Item.Vehicule.Imatriculation + "&reservation=" + (DateTime.Now.Hour * 60 + DateTime.Now.Minute) + "&duree=" + Item.Prix.Duree);
+                WebRequest request = WebRequest.Create("http://127.0.0.1:1234/~berthel/?immatriculation=" + Item.Vehicule.Imatriculation + "&reservation=" + (DateTime.Now.Hour * 60 + DateTime.Now.Minute) + "&duree=" + Item.Prix.Duree);
                 request.GetResponse();
                 try
                 {
